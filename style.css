@@ -67,7 +67,7 @@ html, body{
 
 .input-wrapper {
     display: inline-block;
-    width: 100%; /* или любая нужная ширина */
+    width: 100%; /* или любая нужная ширин */
     text-align: left;
     cursor: text;
 }
