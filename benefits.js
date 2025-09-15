@@ -1,4 +1,4 @@
-const data ='Солнце, встает, над, горизонтом, и заливает небо теплым светом птицы поют в ветвях деревьев дети бегут по росе травы шелестят на ветру река тихо течет мимо берегов люди просыпаются и начинают свой день кофе пахнет уютом хлеб свежий на столе улыбки дарят тепло взгляды говорят без слов время течет медленно но уверенно каждый момент важен каждый шаг имеет значение жизнь прекрасна даже в мелочах стоит остановиться вдохнуть и просто быть'.replaceAll(' ', '\u00A0/').split('/');
+const data ='Солнце, встает, над, горизонтом. и заливает небо теплым светом птицы поют в ветвях деревьев дети бегут по росе травы шелестят на ветру река тихо течет мимо берегов люди просыпаются и начинают свой день кофе пахнет уютом хлеб свежий на столе улыбки дарят тепло взгляды говорят без слов время течет медленно но уверенно каждый момент важен каждый шаг имеет значение жизнь прекрасна даже в мелочах стоит остановиться вдохнуть и просто быть'.replaceAll(' ', '\u00A0/').split('/');
 function countChar(str, char) {
     return str.split(char).length - 1;
 }
@@ -6,6 +6,7 @@ function countChar(str, char) {
 const flexContainer = document.querySelector('.testView');
 const inputElement = document.querySelector('.wordsInput');
 inputElement.focus();
+
 const addSentence = () =>{
 
     let html = '';
@@ -21,51 +22,51 @@ const addSentence = () =>{
 }
 
 flexContainer.addEventListener('click', ()=> inputElement.focus())
-const letters = flexContainer.querySelectorAll('.letter');
 
-inputElement.addEventListener('input', ()=> {
+
+inputElement.addEventListener('input', (input)=> {
 
     let inputValue = inputElement.value;
     const letters = flexContainer.querySelectorAll('.letter');
+    const letter = inputValue.length-1;
 
-    for(let letter = 0; letter < inputValue.length; letter++){
+    if(letter !== 0){
 
-        if(letter !== 0){
-            if(letters[letter-1].classList.contains('letter_incorrect')){
-                console.log(letters[letter-1].textContent, inputValue[inputValue.length-1]);
-                if(letters[letter-1].textContent === inputValue[inputValue.length-1]){
-                    letters[letter-1].classList.remove('letter_incorrect');
-                    letters[letter-1].classList.add('letter_correct');
-                    inputElement.value = inputElement.value.slice(0, -2) + inputValue[inputValue.length-1];
-                    updateCarret();
+        if(letters[letter-1].classList.contains('letter_incorrect')){
 
-                    console.log(inputElement.value, 1);
-                    break;
-                }else{
-                    inputElement.value = inputElement.value.slice(0, -1);
-                    console.log(inputElement.value, 2);
-                    break;
-                }
-                console.log(inputElement.value);
+            console.log(letter);
+            if(letters[letter-1].textContent === input.data ||
+                (letters[letter-1].textContent === '\u00A0' && input.data === ' ')){
+
+                letters[letter-1].classList.remove('letter_incorrect');
+                letters[letter-1].classList.add('letter_correct');
+                inputElement.value = inputElement.value.slice(0, -2) + input.data ;
+                updateCarret();
+            }else{
+
+                inputElement.value = inputElement.value.slice(0, -1);
+                console.log(inputElement.value, 2);
             }
-        }
-
-        if(letters[letter].textContent === inputValue[letter] || (letters[letter].textContent === '\u00A0' && inputValue[letter] === ' ')){
-            letters[letter].classList.add('letter_correct');
-        }else{
-            letters[letter].classList.add('letter_incorrect');
+            return;
         }
     }
-    for(let letter = inputValue.length; letter < letters.length; letter++){
-        letters[letter].classList.remove('letter_correct');
-        letters[letter].classList.remove('letter_incorrect');
+
+    if(letters[letter].textContent === input.data ||
+        (letters[letter].textContent === '\u00A0' && input.data === ' ')){
+
+        letters[letter].classList.add('letter_correct');
+    }else{
+
+        letters[letter].classList.add('letter_incorrect');
     }
 });
 
 const carretElement = document.createElement('span');
 carretElement.classList.add('carret');
 flexContainer.appendChild(carretElement);
+
 addSentence();
+
 const updateCarret = () =>{
     const letters = flexContainer.querySelectorAll('.letter');
 
@@ -160,3 +161,10 @@ inputElement.addEventListener('keydown', function(e) {
         e.preventDefault();
     }
 });
+
+
+
+
+
+
+

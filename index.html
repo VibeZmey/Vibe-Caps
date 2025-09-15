@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="keyboardStyle.css">
     <script src="./benefits.js" defer type="module"></script>
+    <script src="./keyboard.js" defer type="module"></script>
   </head>
   <body>
     <div class="container">
@@ -23,87 +24,84 @@
         </div>
         <div class="testView"></div>
         <div class="keyboard">
-          <!-- Первая строка -->
-          <div class="row">
-            <div class="key esc">Esc</div>
-            <div class="key key_1">1</div>
-            <div class="key key_2">2</div>
-            <div class="key key_3">3</div>
-            <div class="key key_4">4</div>
-            <div class="key key_5">5</div>
-            <div class="key key_6">6</div>
-            <div class="key key_7">7</div>
-            <div class="key key_8">8</div>
-            <div class="key key_9">9</div>
-            <div class="key key_0">0</div>
-            <div class="key">-</div>
-            <div class="key">=</div>
-            <div class="key backspace">Backspace</div>
-          </div>
-
           <!-- Вторая строка -->
           <div class="row">
-            <div class="key tab">Tab</div>
-            <div class="key key_Q">Й</div>
-            <div class="key key_W">Ц</div>
-            <div class="key key_E">У</div>
-            <div class="key key_R">К</div>
-            <div class="key key_T">Е</div>
-            <div class="key key_Y">Н</div>
-            <div class="key key_U">Г</div>
-            <div class="key key_I">Ш</div>
-            <div class="key key_O">Щ</div>
-            <div class="key key_P">З</div>
-            <div class="key key_{">Х</div>
-            <div class="key key_}">Ъ</div>
-            <div class="key backslash">\</div>
+            <div class="key key-esc">Esc</div>
+            <div class="key key-digit-1">1</div>
+            <div class="key key-digit-2">2</div>
+            <div class="key key-digit-3">3</div>
+            <div class="key key-digit-4">4</div>
+            <div class="key key-digit-5">5</div>
+            <div class="key key-digit-6">6</div>
+            <div class="key key-digit-7">7</div>
+            <div class="key key-digit-8">8</div>
+            <div class="key key-digit-9">9</div>
+            <div class="key key-digit-0">0</div>
+            <div class="key key-symbol-MINUS">-</div>
+            <div class="key key-symbol-EQUALS">=</div>
+            <div class="key key-backspace">Backspace</div>
           </div>
 
-          <!-- Третья строка -->
           <div class="row">
-            <div class="key caps">Caps Lock</div>
-            <div class="key key_A">Ф</div>
-            <div class="key key_S">Ы</div>
-            <div class="key key_D">В</div>
-            <div class="key key_F">А</div>
-            <div class="key key_G">П</div>
-            <div class="key key_H">Р</div>
-            <div class="key key_J">О</div>
-            <div class="key key_K">Л</div>
-            <div class="key key_L">Д</div>
-            <div class="key key_:">Ж</div>
-            <div class="key key_'">Э</div>
-            <div class="key enter">Enter</div>
+            <div class="key key-tab">Tab</div>
+            <div class="key key-letter-Q">Й</div>   <!-- Q → Й -->
+            <div class="key key-letter-W">Ц</div>   <!-- W → Ц -->
+            <div class="key key-letter-E">У</div>   <!-- E → У -->
+            <div class="key key-letter-R">К</div>   <!-- R → К -->
+            <div class="key key-letter-T">Е</div>   <!-- T → Е -->
+            <div class="key key-letter-Y">Н</div>   <!-- Y → Н -->
+            <div class="key key-letter-U">Г</div>   <!-- U → Г -->
+            <div class="key key-letter-I">Ш</div>   <!-- I → Ш -->
+            <div class="key key-letter-O">Щ</div>   <!-- O → Щ -->
+            <div class="key key-letter-P">З</div>   <!-- P → З -->
+            <div class="key key-letter-BRACKET_LEFT">Х</div>  <!-- [ → Х -->
+            <div class="key key-letter-BRACKET_RIGHT">Ъ</div> <!-- ] → Ъ -->
+            <div class="key key-symbol-BACKSLASH">\</div>
           </div>
 
-          <!-- Четвёртая строка -->
           <div class="row">
-            <div class="key shift">Shift</div>
-            <div class="key key_Z">Я</div>
-            <div class="key key_X">Ч</div>
-            <div class="key key_C">С</div>
-            <div class="key key_V">М</div>
-            <div class="key key_B">И</div>
-            <div class="key key_N">Т</div>
-            <div class="key key_M">Ь</div>
-            <div class="key key_<">Б</div>
-            <div class="key key_>">Ю</div>
-            <div class="key">/</div>
-            <div class="key shift">Shift</div>
+            <div class="key key-caps-lock">Caps Lock</div>
+            <div class="key key-letter-A">Ф</div>   <!-- A → Ф -->
+            <div class="key key-letter-S">Ы</div>   <!-- S → Ы -->
+            <div class="key key-letter-D">В</div>   <!-- D → В -->
+            <div class="key key-letter-F">А</div>   <!-- F → А -->
+            <div class="key key-letter-G">П</div>   <!-- G → П -->
+            <div class="key key-letter-H">Р</div>   <!-- H → Р -->
+            <div class="key key-letter-J">О</div>   <!-- J → О -->
+            <div class="key key-letter-K">Л</div>   <!-- K → Л -->
+            <div class="key key-letter-L">Д</div>   <!-- L → Д -->
+            <div class="key key-symbol-SEMICOLON">Ж</div>     <!-- ; → Ж -->
+            <div class="key key-symbol-APOSTROPHE">Э</div>    <!-- ' → Э -->
+            <div class="key key-enter">Enter</div>
           </div>
 
-          <!-- Пятая строка -->
           <div class="row">
-            <div class="key ctrl">Ctrl</div>
-            <div class="key win">Win</div>
-            <div class="key alt">Alt</div>
-            <div class="key space">Space</div>
-            <div class="key alt">Alt</div>
-            <div class="key meta">Fn</div>
-            <div class="key ctrl">Ctrl</div>
+            <div class="key key-shift">Shift</div>
+            <div class="key key-letter-Z">Я</div>   <!-- Z → Я -->
+            <div class="key key-letter-X">Ч</div>   <!-- X → Ч -->
+            <div class="key key-letter-C">С</div>   <!-- C → С -->
+            <div class="key key-letter-V">М</div>   <!-- V → М -->
+            <div class="key key-letter-B">И</div>   <!-- B → И -->
+            <div class="key key-letter-N">Т</div>   <!-- N → Т -->
+            <div class="key key-letter-M">Ь</div>   <!-- M → Ь -->
+            <div class="key key-symbol-LESS">Б</div>         <!-- , → Б -->
+            <div class="key key-symbol-GREATER">Ю</div>           <!-- . → Ю -->
+            <div class="key key-symbol-SLASH">, .</div>
+            <div class="key key-shift">Shift</div>
+          </div>
+
+          <div class="row">
+            <div class="key key-ctrl">Ctrl</div>
+            <div class="key key-win">Win</div>
+            <div class="key key-alt">Alt</div>
+            <div class="key key-space">Space</div>
+            <div class="key key-alt">Alt</div>
+            <div class="key key-fn">Fn</div>
+            <div class="key key-ctrl">Ctrl</div>
           </div>
 
         </div>
+      </div>
     </div>
   </body>
 </html>

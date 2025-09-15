@@ -67,33 +67,33 @@ body {
 }
 
 /* Специальные клавиши */
-.key.space {
+.key.key-space {
     min-width: 320px;
 }
 
-.key.backspace {
+.key.key-backspace {
     min-width: 96px;
 }
 
-.key.tab {
+.key.key-tab {
     min-width: 64px;
 }
 
-.key.caps {
+.key.key-caps {
     min-width: 72px;
 }
 
-.key.shift {
+.key.key-shift {
     min-width: 96px;
 }
 
-.key.enter {
+.key.key-enter {
     min-width: 96px;
 }
 
-.key.ctrl,
-.key.alt,
-.key.win {
+.key.key-ctrl,
+.key.key-alt,
+.key.key-win {
     min-width: 64px;
 }
 
@@ -121,16 +121,22 @@ body {
 .key.no-symbol::after {
     content: none;
 }
-
+.key-hint{
+    background: #df7bff !important; /* яркий акцентный цвет */
+    color: white !important;
+    transform: translateY(1px);
+    box-shadow: 0 4px 12px rgba(255, 23, 255, 0.5) !important;
+    transition: all 0.05s ease !important;
+}
 /* Цвет для модификаторов */
-.key.ctrl,
-.key.alt,
-.key.win,
-.key.meta,
-.key.caps,
-.key.shift,
-.key.enter,
-.key.backspace{
+.key.key-ctrl,
+.key.key-alt,
+.key.key-win,
+.key.key-meta,
+.key.key-caps,
+.key.key-shift,
+.key.key-enter,
+.key.key-backspace{
     background: #d0d0d0;
     color: #444;
 }
@@ -142,4 +148,12 @@ body {
     opacity: 0.7;
     display: block;
     margin-top: 2px;
+}
+
+.key.active {
+    background: #c31cec !important; /* яркий акцентный цвет */
+    color: white !important;
+    transform: translateY(1px);
+    box-shadow: 0 4px 12px rgba(255, 23, 255, 0.5) !important;
+    transition: all 0.05s ease !important;
 }
