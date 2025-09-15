@@ -32,8 +32,21 @@ inputElement.addEventListener('input', ()=> {
 
         if(letter !== 0){
             if(letters[letter-1].classList.contains('letter_incorrect')){
-                inputElement.value = inputElement.value.slice(0, -1);
-                break;
+                console.log(letters[letter-1].textContent, inputValue[inputValue.length-1]);
+                if(letters[letter-1].textContent === inputValue[inputValue.length-1]){
+                    letters[letter-1].classList.remove('letter_incorrect');
+                    letters[letter-1].classList.add('letter_correct');
+                    inputElement.value = inputElement.value.slice(0, -2) + inputValue[inputValue.length-1];
+                    updateCarret();
+
+                    console.log(inputElement.value, 1);
+                    break;
+                }else{
+                    inputElement.value = inputElement.value.slice(0, -1);
+                    console.log(inputElement.value, 2);
+                    break;
+                }
+                console.log(inputElement.value);
             }
         }
 
@@ -132,6 +145,18 @@ inputElement.addEventListener('input', ()=> {
             })
         }
     }
-
 })
 
+inputElement.addEventListener('input', ()=> {
+    const input = inputElement.value;
+})
+
+inputElement.addEventListener('keydown', function(e) {
+    if (e.key === 'Backspace' ||
+        e.key === 'Delete' ||
+        (e.key.toLowerCase() === 'x' && (e.ctrlKey || e.metaKey)) ||
+        (e.ctrlKey && (e.key.toLowerCase() === 'v' || e.key.toLowerCase() === 'м')))
+    {
+        e.preventDefault();
+    }
+});
