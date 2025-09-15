@@ -1,0 +1,145 @@
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.key:hover {
+    background: #F3E5F5;
+}
+
+
+.keyboard {
+    background: #b54bd3;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 930px;
+    position: relative;
+    overflow: hidden;
+    z-index: 3;
+
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.key {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 12px 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    user-select: none;
+    cursor: default;
+    min-width: 48px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.1s ease;
+}
+
+
+.key:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Специальные клавиши */
+.key.space {
+    min-width: 320px;
+}
+
+.key.backspace {
+    min-width: 96px;
+}
+
+.key.tab {
+    min-width: 64px;
+}
+
+.key.caps {
+    min-width: 72px;
+}
+
+.key.shift {
+    min-width: 96px;
+}
+
+.key.enter {
+    min-width: 96px;
+}
+
+.key.ctrl,
+.key.alt,
+.key.win {
+    min-width: 64px;
+}
+
+.key.meta {
+    min-width: 64px;
+}
+/* Маленькие клавиши (F-клавиши) */
+.row.fkeys {
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+/* Клавиши с символами */
+.key::after {
+    content: attr(data-symbol);
+    position: absolute;
+    font-size: 10px;
+    top: 2px;
+    right: 4px;
+    color: #888;
+    font-weight: normal;
+}
+
+/* Убираем двойные символы, если не нужны */
+.key.no-symbol::after {
+    content: none;
+}
+
+/* Цвет для модификаторов */
+.key.ctrl,
+.key.alt,
+.key.win,
+.key.meta,
+.key.caps,
+.key.shift,
+.key.enter,
+.key.backspace{
+    background: #d0d0d0;
+    color: #444;
+}
+
+
+/* Надписи на клавишах */
+.key span {
+    font-size: 10px;
+    opacity: 0.7;
+    display: block;
+    margin-top: 2px;
+}

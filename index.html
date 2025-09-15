@@ -4,22 +4,107 @@
     <meta charset="utf-8">
     <title>VibeCaps</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="keyboardStyle.css">
     <script src="./benefits.js" defer type="module"></script>
   </head>
   <body>
     <div class="container">
-      <div class="item item1"><p class="info-text">Hello World</p></div>
-      <div class="item item2">
-        <div class="timer text">
-          Timer
-        </div>
-        <input class="wordsInput" autocomplete="off">
-        <div class="testView"></div>
-      </div>
-      <div class="item item3">
+      <div class="item item1">
         <p class="info-text">Hello World</p>
-        <button class="button"></button>
+        <div class="stats">
+          <p>Кол-во ошибок:</p>
+          <span id="mistake" class="text">0</span>
+        </div>
       </div>
+
+      <div class="item item2">
+        <div class="inputWrapper">
+         <input class="wordsInput" autocomplete="off">
+        </div>
+        <div class="testView"></div>
+        <div class="keyboard">
+          <!-- Первая строка -->
+          <div class="row">
+            <div class="key esc">Esc</div>
+            <div class="key key_1">1</div>
+            <div class="key key_2">2</div>
+            <div class="key key_3">3</div>
+            <div class="key key_4">4</div>
+            <div class="key key_5">5</div>
+            <div class="key key_6">6</div>
+            <div class="key key_7">7</div>
+            <div class="key key_8">8</div>
+            <div class="key key_9">9</div>
+            <div class="key key_0">0</div>
+            <div class="key">-</div>
+            <div class="key">=</div>
+            <div class="key backspace">Backspace</div>
+          </div>
+
+          <!-- Вторая строка -->
+          <div class="row">
+            <div class="key tab">Tab</div>
+            <div class="key key_Q">Й</div>
+            <div class="key key_W">Ц</div>
+            <div class="key key_E">У</div>
+            <div class="key key_R">К</div>
+            <div class="key key_T">Е</div>
+            <div class="key key_Y">Н</div>
+            <div class="key key_U">Г</div>
+            <div class="key key_I">Ш</div>
+            <div class="key key_O">Щ</div>
+            <div class="key key_P">З</div>
+            <div class="key key_{">Х</div>
+            <div class="key key_}">Ъ</div>
+            <div class="key backslash">\</div>
+          </div>
+
+          <!-- Третья строка -->
+          <div class="row">
+            <div class="key caps">Caps Lock</div>
+            <div class="key key_A">Ф</div>
+            <div class="key key_S">Ы</div>
+            <div class="key key_D">В</div>
+            <div class="key key_F">А</div>
+            <div class="key key_G">П</div>
+            <div class="key key_H">Р</div>
+            <div class="key key_J">О</div>
+            <div class="key key_K">Л</div>
+            <div class="key key_L">Д</div>
+            <div class="key key_:">Ж</div>
+            <div class="key key_'">Э</div>
+            <div class="key enter">Enter</div>
+          </div>
+
+          <!-- Четвёртая строка -->
+          <div class="row">
+            <div class="key shift">Shift</div>
+            <div class="key key_Z">Я</div>
+            <div class="key key_X">Ч</div>
+            <div class="key key_C">С</div>
+            <div class="key key_V">М</div>
+            <div class="key key_B">И</div>
+            <div class="key key_N">Т</div>
+            <div class="key key_M">Ь</div>
+            <div class="key key_<">Б</div>
+            <div class="key key_>">Ю</div>
+            <div class="key">/</div>
+            <div class="key shift">Shift</div>
+          </div>
+
+          <!-- Пятая строка -->
+          <div class="row">
+            <div class="key ctrl">Ctrl</div>
+            <div class="key win">Win</div>
+            <div class="key alt">Alt</div>
+            <div class="key space">Space</div>
+            <div class="key alt">Alt</div>
+            <div class="key meta">Fn</div>
+            <div class="key ctrl">Ctrl</div>
+          </div>
+
+        </div>
     </div>
   </body>
 </html>
+

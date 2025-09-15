@@ -8,21 +8,30 @@ html, body{
     height: 100%;
 }
 
-
+.inputWrapper{
+    position: absolute;
+}
 .testView{
     display: flex;
+
     flex-direction: row;
     flex-wrap: wrap;
-    position: absolute;
+    position: relative;
     overflow: auto;
-
+    width: 100%;
+    max-width: 930px;
+    margin: 0 auto;
+    top: 10%;
 }
+.testView::-webkit-scrollbar {
+    display: none;
+}
+
 .wordsInput{
-    position: absolute;
+    position: relative;
     top: -9999px;
 }
 .word{
-    margin: 0 10px;
     height: 41px;
     z-index: 2;
 }
@@ -32,12 +41,20 @@ html, body{
     font-size: 30px;
     white-space: nowrap;
     display: inline-block;
+    vertical-align: top;
+    color: rgb(179, 179, 179);
 }
 .letter_correct{
-    color: green;
+    color: white;
+
 }
 .letter_incorrect{
-    color: red;
+    color: #ff0000;
+    background: #ff7f81;
+    text-decoration: underline;
+    text-decoration-color: #ff0000;
+    text-underline-offset: 2px;
+    border-radius: 3px;
 }
 
 .timer {
@@ -53,7 +70,7 @@ html, body{
 .container {
     width: 100%;
     display: grid;
-    grid-template-columns: minmax(min-content, 15%) 70% minmax(min-content, 15%); /* фиксированные ширины */
+    grid-template-columns: minmax(min-content, 15%) 85%; /* фиксированные ширины */
     white-space: nowrap;
 }
 .item{
@@ -61,17 +78,18 @@ html, body{
 }
 
 .item1 {
-    background-color: #e4f2b3;
+    background-color: #b54bd3;
     text-align: center;
     height: 100vh; /* 100% высоты viewport */
+    position: relative;
 }
 .item2 {
-    background-color: #b3f2f0;
+    background-color: #8E24AA;
     position: relative;
     height: 100vh; /* 100% высоты viewport */
 }
 .item3 {
-    background-color: #b3f2c0;
+    background-color: #8E24AA;
     height: 100vh; /* 100% высоты viewport */
 }
 
@@ -83,17 +101,18 @@ html, body{
 }
 
 .carret {
-    width: 3px;
+    width: 4px;
     height: 40px;
-    background-color: #333;
-    border-radius: 2px; /* Закруглённые края — получается "пульс" */
+    background-color: #df7bff;
+    border-radius: 3px; /* Закруглённые края — получается "пульс" */
     animation: blink 1s step-end infinite;
     position: relative;
     z-index: 1;
-    left: 10px;
+    left: 4px;
 }
 
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
+
