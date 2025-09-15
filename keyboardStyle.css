@@ -18,7 +18,7 @@ body {
 
 
 .keyboard {
-    background: #b54bd3;
+    background: #77428c;
     padding: 16px;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -30,8 +30,8 @@ body {
     position: relative;
     overflow: hidden;
     z-index: 3;
-
     margin: 0 auto;
+    top:15%;
 }
 
 .row {

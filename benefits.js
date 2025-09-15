@@ -1,4 +1,4 @@
-const data ='Солнце встает над горизонтом и заливает небо теплым светом птицы поют в ветвях деревьев дети бегут по росе травы шелестят на ветру река тихо течет мимо берегов люди просыпаются и начинают свой день кофе пахнет уютом хлеб свежий на столе улыбки дарят тепло взгляды говорят без слов время течет медленно но уверенно каждый момент важен каждый шаг имеет значение жизнь прекрасна даже в мелочах стоит остановиться вдохнуть и просто быть'.replaceAll(' ', '\u00A0/').split('/');
+const data ='Солнце, встает, над, горизонтом, и заливает небо теплым светом птицы поют в ветвях деревьев дети бегут по росе травы шелестят на ветру река тихо течет мимо берегов люди просыпаются и начинают свой день кофе пахнет уютом хлеб свежий на столе улыбки дарят тепло взгляды говорят без слов время течет медленно но уверенно каждый момент важен каждый шаг имеет значение жизнь прекрасна даже в мелочах стоит остановиться вдохнуть и просто быть'.replaceAll(' ', '\u00A0/').split('/');
 function countChar(str, char) {
     return str.split(char).length - 1;
 }
@@ -68,22 +68,9 @@ inputElement.addEventListener('input', ()=> {
     const lastLetter = letters[inputElement.value.length-1];
     const lastLetterRect = lastLetter.getBoundingClientRect();
     const flexConteinerRect = flexContainer.getBoundingClientRect();
-    console.log(`${lastLetterRect.left} ${flexConteinerRect.left} ${lastLetterRect.width}`);
 
-    if(lastLetter.textContent === '\u00A0'){
-        const spanSpace = document.createElement('span');
-        spanSpace.textContent = ' ';
-        spanSpace.classList.add('letter');
-
-        const spaceRect = spanSpace.getBoundingClientRect();
-        console.log(spanSpace.getBoundingClientRect().width);
-        carretElement.style.left = `${lastLetterRect.left - flexConteinerRect.left + lastLetterRect.width}px`;
-        carretElement.style.top = `${lastLetterRect.top - flexConteinerRect.top}px`;
-    }else if(lastLetter.textContent !== '\u00A0'){
-
-        carretElement.style.left = `${lastLetterRect.left - flexConteinerRect.left + lastLetterRect.width}px`;
-        carretElement.style.top = `${lastLetterRect.top - flexConteinerRect.top}px`;
-    }
+    carretElement.style.left = `${lastLetterRect.left - flexConteinerRect.left + lastLetterRect.width}px`;
+    carretElement.style.top = `${lastLetterRect.top - flexConteinerRect.top}px`;
 })
 
 const timer = () => {
