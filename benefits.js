@@ -53,9 +53,7 @@ const carretElement = document.createElement('span');
 carretElement.classList.add('carret');
 flexContainer.appendChild(carretElement);
 addSentence();
-
-const wrapperElement = document.querySelector('.inputWrapper');
-inputElement.addEventListener('input', ()=> {
+const updateCarret = () =>{
     const letters = flexContainer.querySelectorAll('.letter');
 
     if(inputElement.value.length === 0){
@@ -71,6 +69,10 @@ inputElement.addEventListener('input', ()=> {
 
     carretElement.style.left = `${lastLetterRect.left - flexConteinerRect.left + lastLetterRect.width}px`;
     carretElement.style.top = `${lastLetterRect.top - flexConteinerRect.top}px`;
+}
+const wrapperElement = document.querySelector('.inputWrapper');
+inputElement.addEventListener('input', ()=> {
+    updateCarret();
 })
 
 const timer = () => {
@@ -109,5 +111,27 @@ inputElement.addEventListener('input', ()=> {
             mistakeElement.textContent = mistakes;
         }
     }
+})
+
+const correctCheck = (divElement) =>{
+    return divElement.querySelectorAll(".letter_correct").length === divElement.querySelectorAll(".letter").length;
+}
+
+const hiddenElements = [];
+
+inputElement.addEventListener('input', ()=> {
+    const divElements = flexContainer.querySelectorAll('.word');
+    const letters = flexContainer.querySelectorAll('.letter');
+    if(inputElement.value.length > 1 && inputElement.value.length !== letters.length){
+        if(letters[inputElement.value.length-1].getBoundingClientRect().top !== letters[inputElement.value.length-2].getBoundingClientRect().top){
+            divElements.forEach((element) => {
+                if(correctCheck(element) === true){
+                    element.classList.add('hiddenWord');
+                    updateCarret();
+                }
+            })
+        }
+    }
+
 })
 

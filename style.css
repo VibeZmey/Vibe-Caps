@@ -11,6 +11,13 @@ html, body{
 .inputWrapper{
     position: absolute;
 }
+
+.hiddenWord{
+    visibility: hidden;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
 .testView{
     display: flex;
     flex-direction: row;
@@ -18,7 +25,7 @@ html, body{
     position: relative;
     overflow: auto;
     width: 100%;
-    max-height: 500px;
+    max-height: 245px;
     max-width: 930px;
     margin: 0 auto;
     top: 8%;
