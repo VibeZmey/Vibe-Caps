@@ -1,4 +1,4 @@
-const data ='Солнце, встает, над, горизонтом. и заливает небо теплым светом птицы поют в ветвях деревьев дети бегут по росе травы шелестят на ветру река тихо течет мимо берегов люди просыпаются и начинают свой день кофе пахнет уютом хлеб свежий на столе улыбки дарят тепло взгляды говорят без слов время течет медленно но уверенно каждый момент важен каждый шаг имеет значение жизнь прекрасна даже в мелочах стоит остановиться вдохнуть и просто быть'.replaceAll(' ', '\u00A0/').split('/');
+const data ='Солнце, встает, над'.replaceAll(' ', '\u00A0/').split('/');
 function countChar(str, char) {
     return str.split(char).length - 1;
 }
@@ -23,6 +23,15 @@ const addSentence = () =>{
 
 flexContainer.addEventListener('click', ()=> inputElement.focus())
 
+inputElement.addEventListener('input', () => {
+    const letters = flexContainer.querySelectorAll('.letter');
+    setTimeout(()=>{
+        if(letters[letters.length - 1].classList.contains('letter_correct')){
+            inputElement.readOnly = true;
+        }
+    }, 0)
+
+});
 
 inputElement.addEventListener('input', (input)=> {
 
@@ -34,7 +43,6 @@ inputElement.addEventListener('input', (input)=> {
 
         if(letters[letter-1].classList.contains('letter_incorrect')){
 
-            console.log(letter);
             if(letters[letter-1].textContent === input.data ||
                 (letters[letter-1].textContent === '\u00A0' && input.data === ' ')){
 
@@ -50,21 +58,30 @@ inputElement.addEventListener('input', (input)=> {
             return;
         }
     }
+    if(letter < letters.length){
+        if(letters[letter].textContent === input.data ||
+            (letters[letter].textContent === '\u00A0' && input.data === ' ')){
+            letters[letter].classList.add('letter_correct');
+        }else{
 
-    if(letters[letter].textContent === input.data ||
-        (letters[letter].textContent === '\u00A0' && input.data === ' ')){
-
-        letters[letter].classList.add('letter_correct');
-    }else{
-
-        letters[letter].classList.add('letter_incorrect');
+            letters[letter].classList.add('letter_incorrect');
+        }
     }
+
 });
 
 const carretElement = document.createElement('span');
-carretElement.classList.add('carret');
 flexContainer.appendChild(carretElement);
 
+inputElement.addEventListener('click', ()=> {
+    carretElement.classList.add('carret');
+    carretElement.classList.remove('carret-active');
+})
+
+inputElement.addEventListener('blur', ()=> {
+    carretElement.classList.remove('carret');
+    carretElement.classList.add('carret-active');
+})
 addSentence();
 
 const updateCarret = () =>{
@@ -161,8 +178,6 @@ inputElement.addEventListener('keydown', function(e) {
         e.preventDefault();
     }
 });
-
-
 
 
 

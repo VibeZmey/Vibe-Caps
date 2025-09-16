@@ -49,7 +49,7 @@ html, body{
     white-space: nowrap;
     display: inline-block;
     vertical-align: top;
-    color: rgb(179, 179, 179);
+    color: rgb(131, 131, 131);
 }
 .letter_correct{
     color: white;
@@ -106,7 +106,7 @@ html, body{
     height: 40px;
 }
 
-.carret {
+.carret-active{
     width: 4px;
     height: 40px;
     background-color: #df7bff;
@@ -122,3 +122,12 @@ html, body{
     50% { opacity: 0; }
 }
 
+.carret{
+    width: 4px;
+    height: 40px;
+    background-color: #df7bff;
+    border-radius: 3px; /* Закруглённые края — получается "пульс" */
+    position: relative;
+    z-index: 1;
+    left: 4px;
+}
