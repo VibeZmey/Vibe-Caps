@@ -1,10 +1,4 @@
-// ==================================================
-// Подсветка клавиш виртуальной клавиатуры
-// ==================================================
-
-const inputElement = document.querySelector('.wordsInput');
-const flexContainer = document.querySelector('.testView');
-
+import { flexContainer, inputElement } from './domElements.js';
 
 // Маппинг: введённый символ → CSS-селектор клавиши
 const keyMap = {
@@ -65,19 +59,30 @@ const keyMap = {
     'Meta': 'key-win'
 };
 
-// Обработка ввода текста (буквы, цифры, символы)
-inputElement.addEventListener('input', function(e) {
-    const char = e.data; // введённый символ
-    if (!char) return;
-    activateKey(char.toLowerCase()); // игнорируем регистр
-});
+
 
 const hintKeyActive = (symbol) => {
+    console.log(symbol);
     const className = keyMap[symbol];
+    console.log(className);
     const keyEl = document.querySelector(`.key.${className}`);
+    console.log(keyEl);
     keyEl.classList.add('key-hint');
 }
-hintKeyActive(flexContainer.querySelector('.letter').textContent.toLowerCase());
+
+export const keyboardActive = () => {
+    hintKeyActive(flexContainer.querySelector('.letter').textContent.toLowerCase());
+}
+
+export const updateKeyboard = () =>{
+    const keyboard = document.querySelector('.keyboard');
+    const keys = keyboard.querySelectorAll('.key');
+    keys.forEach(key => {
+        if(key.classList.contains('key-hint')) {
+            key.classList.remove('key-hint');
+        }
+    })
+}
 
 const hintKeyDisable = (symbol) => {
     // Находим класс клавиши
@@ -91,25 +96,39 @@ const hintKeyDisable = (symbol) => {
     keyEl.classList.remove('key-hint');
 }
 
-inputElement.addEventListener('input', (symbol) => {
-    const letters = flexContainer.querySelectorAll('.letter');
-    const s = symbol.data.toLowerCase()
-    const className = keyMap[s];
-    if (!className) return;
-    // Находим элемент
-    const keyEl = document.querySelector(`.key.${className}`);
+export const setupKeyboardHandlers = () => {
+    inputElement.addEventListener('input', (symbol) => {
+        const letters = flexContainer.querySelectorAll('.letter');
+        const s = symbol.data.toLowerCase()
+        const className = keyMap[s];
+        if (!className) return;
+        // Находим элемент
+        const keyEl = document.querySelector(`.key.${className}`);
+        console.log(letters[inputElement.value.length-1].classList.contains("letter_correct"))
 
-    if(inputElement.value.length !== letters.length &&
-        letters[inputElement.value.length-1].classList.contains("letter_correct")) {
-        if(letters[inputElement.value.length].textContent === '\u00A0')
-            hintKeyActive(' ');
-        else
-            hintKeyActive(letters[inputElement.value.length].textContent.toLowerCase());
-    }
-    if(keyEl.classList.contains('key-hint') && letters[inputElement.value.length-1].classList.contains("letter_correct")) {
-        hintKeyDisable(s);
-    }
-});
+        if(inputElement.value.length !== letters.length &&
+            letters[inputElement.value.length-1].classList.contains("letter_correct")) {
+
+            if(letters[inputElement.value.length].textContent === '\u00A0')
+                hintKeyActive(' ');
+            else
+                hintKeyActive(letters[inputElement.value.length].textContent.toLowerCase());
+        }
+        if(keyEl.classList.contains('key-hint') && letters[inputElement.value.length-1].classList.contains("letter_correct")) {
+
+            hintKeyDisable(s);
+        }
+    });
+
+    // Обработка ввода текста (буквы, цифры, символы)
+    inputElement.addEventListener('input', function(e) {
+        const char = e.data; // введённый символ
+        if (!char) return;
+        activateKey(char.toLowerCase()); // игнорируем регистр
+    });
+}
+
+
 
 // Функция подсветки клавиши
 function activateKey(symbol) {

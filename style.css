@@ -28,7 +28,7 @@ html, body{
     max-height: 245px;
     max-width: 930px;
     margin: 0 auto;
-    top: 8%;
+    top: 100px;
 }
 .testView::-webkit-scrollbar {
     display: none;
