@@ -34,6 +34,5 @@ export const setupCarretHandlers = () => {
 
     inputElement.addEventListener('input', () => {
         updateCarret();
-        console.log(1);
     });
 }

@@ -3,6 +3,30 @@
     padding: 0;
     box-sizing: border-box;
 }
+.my-theme-dark{
+    --bg-item1-color: #77428c;
+    --bg-item2-color: #623773;
+    --carret-color: #df7bff;
+    --dialog--box-shadow:#2c1735;
+    --key-hint-color: #df7bff;
+    --key-active-color: #c31cec;
+    --key-shadow: rgba(255, 23, 255, 0.5);
+    --key-mod-color: #b393bd;
+    --progress-stroke-color: #df7bff;
+}
+
+.my-theme-light {
+    --bg-item1-color: #d6c3e2;
+    --bg-item2-color: #cbb1d9;
+    --carret-color: #e8a3ff;
+    --dialog--box-shadow: rgba(44, 23, 53, 0.25);
+    --key-hint-color: #e8a3ff;
+    --key-active-color: #ce7aef;
+    --key-shadow: rgba(44, 23, 53, 0.3);
+    --key-mod-color: #bea9cc;
+    --progress-stroke-color: #e8a3ff;
+}
+
 
 html, body{
     height: 100%;
@@ -10,6 +34,14 @@ html, body{
 
 .inputWrapper{
     position: absolute;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: hidden;
+    width: 100%;
+    max-height: 245px;
+    max-width: 930px;
+    margin: 0 auto;
+    top: 100px;
 }
 
 .hiddenWord{
@@ -22,12 +54,15 @@ html, body{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-content: flex-start;
     position: relative;
     overflow: hidden;
     width: 100%;
-    max-height: 245px;
+    min-height: 123px;
+    max-height: 123px;
     max-width: 930px;
     margin: 0 auto;
+    padding: 0;
     top: 100px;
 }
 .testView::-webkit-scrollbar {
@@ -86,15 +121,20 @@ html, body{
 }
 
 .item1 {
-    background-color: #77428c;
+    background-color: var(--bg-item1-color);
     text-align: center;
     height: 100vh; /* 100% высоты viewport */
-    width: 15%;
+    width: 150px;
+    display: grid;
+    grid-template-columns: 100%;
+    align-content: space-between;
+    justify-items: center;    /* ✅ Центрирует по горизонтали */
+    align-items: center;      /* ✅ Центрирует по вертикали */
     position: relative;
 }
 .item2 {
-    width: 85%;
-    background-color: #623773;
+    width: 100%;
+    background-color: var(--bg-item2-color);
     position: relative;
     height: 100vh; /* 100% высоты viewport */
 }
@@ -109,7 +149,7 @@ html, body{
 .carret-active{
     width: 4px;
     height: 40px;
-    background-color: #df7bff;
+    background-color: var(--carret-color);
     border-radius: 3px; /* Закруглённые края — получается "пульс" */
     animation: blink 1s step-end infinite;
     position: relative;
@@ -125,9 +165,189 @@ html, body{
 .carret{
     width: 4px;
     height: 40px;
-    background-color: #df7bff;
+    background-color: var(--carret-color);
     border-radius: 3px; /* Закруглённые края — получается "пульс" */
     position: relative;
     z-index: 1;
     left: 4px;
+}
+
+.dialog-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo{
+    fill: white;
+    position: relative;
+}
+
+.dialog::-webkit-scrollbar {
+    display: none;
+}
+
+.dialog {
+    padding: 20px;
+    background: var(--bg-item2-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--dialog--box-shadow);
+    width: 650px;
+    height: 500px;
+    position: relative;
+    border: none;
+}
+
+.dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dialog-header {
+    color: white;
+    font-size: 40px;
+    font-family: 'Comic Sans MS', sans-serif;
+    text-align: center;
+}
+
+.writed-text{
+    color: white;
+    width: 100%;
+    font-size: 40px;
+    grid-column: 1/4;
+    grid-row: 2;
+    font-family: 'Comic Sans MS', sans-serif;
+    text-align: center;
+    display: block; /* или block */
+    word-wrap: normal; /* или overflow-wrap */
+}
+
+
+.button{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: white;
+    border-radius: 8px;
+    padding: 12px 10px;
+    margin: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    text-align: center;
+    user-select: none;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    transition: all 0.1s ease;
+    width: 100px;
+    height: 40px;
+    border: none;
+}
+
+
+.button:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 3px rgb(0, 0, 0);
+}
+/*
+.button:hover {
+    background: #F3E5F5;
+    transform: scale(1.1);
+}*/
+
+.button:focus {
+    outline: none; /* убираем дефолтный */
+}
+
+.button::after {
+    content: attr(data-symbol);
+    position: absolute;
+    font-size: 10px;
+    top: 2px;
+    right: 4px;
+    color: #888;
+    font-weight: normal;
+}
+
+.restart{
+    grid-column: 2;
+    grid-row:3;
+}
+.update{
+    grid-column: 1;
+    grid-row:3;
+}
+
+.github{
+
+}
+
+.sun{
+    transform: scale(1.1);
+}
+.github:hover,
+.update:hover,
+.restart:hover{
+    transform: scale(1.1);
+}
+
+.button-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.theme-icon{
+    width: 98px;
+    height: 96px;
+    position: relative;
+
+}
+.theme-icon:hover{
+    transform: scale(1.1);
+}
+
+.progress-circle {
+    min-width: 70px;
+    min-height: 70px;
+    width: 200px;
+    height: 200px;
+
+    margin: 20px;
+}
+
+.progress-bg {
+    fill: none;
+    stroke: #e0e0e0;
+    stroke-width: 12;
+}
+
+.progress-fill-speed,
+.progress-fill-accuracy{
+    fill: none;
+    stroke:var(--progress-stroke-color);
+    stroke-width: 12;
+    stroke-linecap: butt; /* Сглаженные концы */
+    transition: stroke-dasharray 0.8s ease;
+}
+
+.progress-text-accuracy,
+.progress-text-speed{
+    font-size: 24px;
+    font-weight: bold;
+    fill: white;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    font-family: Arial, sans-serif;
+}
+
+.stats-content{
+    display: flex;
+    flex-direction: row;
 }

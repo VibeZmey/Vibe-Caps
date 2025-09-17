@@ -62,11 +62,8 @@ const keyMap = {
 
 
 const hintKeyActive = (symbol) => {
-    console.log(symbol);
     const className = keyMap[symbol];
-    console.log(className);
     const keyEl = document.querySelector(`.key.${className}`);
-    console.log(keyEl);
     keyEl.classList.add('key-hint');
 }
 
@@ -104,7 +101,6 @@ export const setupKeyboardHandlers = () => {
         if (!className) return;
         // Находим элемент
         const keyEl = document.querySelector(`.key.${className}`);
-        console.log(letters[inputElement.value.length-1].classList.contains("letter_correct"))
 
         if(inputElement.value.length !== letters.length &&
             letters[inputElement.value.length-1].classList.contains("letter_correct")) {

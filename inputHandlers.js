@@ -2,7 +2,7 @@
 import { flexContainer, inputElement, mistakeElement } from './domElements.js';
 import {updateCarret} from './carret.js';
 
-let mistakes = 0;
+export let mistakes = 0;
 
 const correctCheck = (divElement) =>{
     return divElement.querySelectorAll(".letter_correct").length === divElement.querySelectorAll(".letter").length;
@@ -77,7 +77,6 @@ export const setupInputHandlers = () => {
         for(const letter of letters){
             if(letter.classList.contains('letter_incorrect')){
                 mistakes++;
-                mistakeElement.textContent = mistakes;
             }
         }
     });

@@ -1,26 +1,25 @@
-// timer.js
-import { flexContainer, inputElement } from './domElements.js';
 
-export const timer = () => {
-    const now = new Date().getTime();
-    let curTime = 0;
-    const timerId = setInterval(() => {
-        curTime = new Date().getTime();
-        const letters = flexContainer.querySelectorAll('.letter');
-        if(letters.length !== 0){
-            if (letters[letters.length - 1].classList.contains('letter_correct')) {
-                console.log(curTime-now);
-                clearInterval(timerId);
-            }
-        }
-    }, 1000)
+let startTime = null;
+let timerRunning = false;
+
+export function startTimer() {
+    if (timerRunning) return; // Защита от повторного запуска
+    startTime = performance.now(); // Точное время в мс с высокой точностью
+    timerRunning = true;
+    console.log("Таймер запущен");
 }
 
-export const setTimer = () => {
-    inputElement.addEventListener('input', function e(){
-        if(document.activeElement === inputElement){
-            timer();
-            inputElement.removeEventListener('input', e);
-        }
-    })
+export function stopTimer() {
+    if (!timerRunning || startTime === null) {
+        console.warn("Таймер не был запущен!");
+        return 0;
+    }
+
+    const endTime = performance.now();
+    const elapsed = endTime - startTime; // Прошедшее время в миллисекундах
+    timerRunning = false;
+    startTime = null;
+
+    console.log(`Таймер остановлен. Прошло: ${elapsed.toFixed(2)} мс`);
+    return elapsed;
 }
