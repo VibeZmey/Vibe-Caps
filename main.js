@@ -116,8 +116,6 @@ function animateSpeedProgress(svgCircle, text, value, duration = 800) {
 
         const current = start + (end - start) * progress;
         svgCircle.style.strokeDashoffset = current;
-
-        console.log('Текущий value для текста:', value); // 👈 И ЭТО!
         text.textContent = `${Math.round(value)}`;
 
         if (progress < 1) requestAnimationFrame(step);

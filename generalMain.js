@@ -28,7 +28,7 @@ h2.style.height = '40px';
 const animation = () =>{
     const text = 'Добро пожаловать на ';
     const name = 'VibeCaps';
-    const underText = 'Проверь свою скорость печти';
+    const underText = 'Проверь свою скорость печати';
     for(let i = 0; i < text.length; i++){
         setTimeout(()=>{
             const spanElement = document.createElement('span');
