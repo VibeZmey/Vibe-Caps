@@ -8,14 +8,26 @@ import { setupKeyboardHandlers, keyboardActive, updateKeyboard } from "./keyboar
 import { sun, moon } from './data.js';
 import * as timer from './timer.js';
 import {stopTimer} from "./timer.js";
+import {testViewElement} from "./domElements.js";
 
 
-domElements.inputElement.focus()
-domElements.flexContainer.addEventListener('click', ()=> domElements.inputElement.focus());
-domElements.flexContainer.appendChild(domElements.carretElement);
-domElements.carretElement.classList.add('carret-active');
+domElements.testViewElement.addEventListener('click', ()=> {
+    domElements.inputElement.focus();
+    domElements.inputElement.readOnly = false;
+    domElements.blurTextElement.style.visibility = 'hidden';
+    domElements.carretElement.classList.add('carret-active');
+    domElements.carretElement.classList.remove('carret');
+    domElements.testViewElement.style.filter = 'blur(0px)';
+    keyboardActive();
+    timer.startTimer();
+});
+
+domElements.testViewElement.style.filter = 'blur(5px)';
+domElements.blurTextElement.style.visibility = 'visible';
+domElements.testStatsElement.close();
+domElements.testViewElement.appendChild(domElements.carretElement);
+domElements.carretElement.classList.add('carret');
 updateSentence();
-keyboardActive();
 setupInputHandlers();
 setupCarretHandlers();
 setupKeyboardHandlers();
@@ -23,23 +35,18 @@ setupKeyboardHandlers();
 domElements.updateButtonElement.addEventListener('click', ()=>{
     updateSentence();
     updateKeyboard();
-    domElements.inputElement.readOnly = false;
-    domElements.carretElement.classList.add('carret-active');
-    domElements.carretElement.classList.remove('carret');
+    domElements.testViewElement.style.filter = 'blur(5px)';
+    domElements.blurTextElement.style.visibility = 'visible';
     domElements.testStatsElement.close();
-    domElements.inputElement.focus();
 })
 
 domElements.restartButtonElement.addEventListener('click', ()=>{
     restartSentence();
     updateKeyboard();
-    domElements.inputElement.readOnly = false;
-    domElements.carretElement.classList.add('carret-active');
-    domElements.carretElement.classList.remove('carret');
+    domElements.testViewElement.style.filter = 'blur(5px)';
+    domElements.blurTextElement.style.visibility = 'visible';
     domElements.testStatsElement.close();
-    domElements.inputElement.focus();
 })
-
 
 domElements.inputElement.addEventListener('input',()=>{
     if(domElements.inputElement.readOnly){
@@ -47,14 +54,12 @@ domElements.inputElement.addEventListener('input',()=>{
         domElements.testStatsElement.showModal();
 
         const accuracy = Math.round(((data[currentSentence].length-mistakes)/data[currentSentence].length)*100);
-        animateProgress(domElements.accuracyCircleElement, domElements.accuracyText, accuracy);
+        animateAccuracyProgress(domElements.accuracyCircleElement, domElements.accuracyText, accuracy);
 
         const words = document.querySelectorAll('.word');
-        const speed = (words.length/((timer.stopTimer()/1000)/60));
-        animateProgress(domElements.speedCircleElement, domElements.speedText, speed);
-    }
-    if(domElements.inputElement.value.length > 0){
-        timer.startTimer();
+        const speed = Math.round(words.length/((timer.stopTimer()/1000)/60));
+        console.log(speed);
+        animateSpeedProgress(domElements.speedCircleElement, domElements.speedText, speed);
     }
 })
 
@@ -78,7 +83,7 @@ themeIconElement.addEventListener('click', ()=>{
 const radius = 44;
 const circumference = 2 * Math.PI * radius;
 // Вместо прямого установления — плавно анимируем
-function animateProgress(svgCircle, text, value, duration = 800) {
+function animateAccuracyProgress(svgCircle, text, value, duration = 800) {
     const start = parseFloat(svgCircle.getAttribute('stroke-dashoffset'));
     const end = circumference * (1 - value / 100);
 
@@ -96,6 +101,28 @@ function animateProgress(svgCircle, text, value, duration = 800) {
 
         if (progress < 1) requestAnimationFrame(step);
     }
+    requestAnimationFrame(step);
+}
+function animateSpeedProgress(svgCircle, text, value, duration = 800) {
+    const start = parseFloat(svgCircle.getAttribute('stroke-dashoffset'));
+    const end = circumference * (1 - value / 200); // ← Максимум 200
+
+    let startTime = null;
+
+    function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        const current = start + (end - start) * progress;
+        svgCircle.style.strokeDashoffset = current;
+
+        console.log('Текущий value для текста:', value); // 👈 И ЭТО!
+        text.textContent = `${Math.round(value)}`;
+
+        if (progress < 1) requestAnimationFrame(step);
+    }
+
     requestAnimationFrame(step);
 }
 

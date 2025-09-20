@@ -1,5 +1,5 @@
 // inputHandlers.js
-import { flexContainer, inputElement, mistakeElement } from './domElements.js';
+import {testViewElement, inputElement, mistakeElement,} from './domElements.js';
 import {updateCarret} from './carret.js';
 
 export let mistakes = 0;
@@ -22,7 +22,7 @@ export const setupInputHandlers = () => {
 
     inputElement.addEventListener('input', (input) => {
         let inputValue = inputElement.value;
-        const letters = flexContainer.querySelectorAll('.letter');
+        const letters = testViewElement.querySelectorAll('.letter');
         const letter = inputValue.length-1;
 
         if(letter !== 0){
@@ -46,20 +46,22 @@ export const setupInputHandlers = () => {
                 letters[letter].classList.add('letter_correct');
             }else{
                 letters[letter].classList.add('letter_incorrect');
+                mistakes++;
+                console.log(mistakes);
             }
         }
     });
 
     inputElement.addEventListener('input', () => {
-        const letters = flexContainer.querySelectorAll('.letter');
+        const letters = testViewElement.querySelectorAll('.letter');
         if(letters[letters.length - 1].classList.contains('letter_correct')){
             inputElement.readOnly = true;
         }
     });
 
     inputElement.addEventListener('input', () => {
-        const divElements = flexContainer.querySelectorAll('.word');
-        const letters = flexContainer.querySelectorAll('.letter');
+        const divElements = testViewElement.querySelectorAll('.word');
+        const letters = testViewElement.querySelectorAll('.letter');
         if(inputElement.value.length > 1 && inputElement.value.length !== letters.length){
             if(letters[inputElement.value.length-1].getBoundingClientRect().top !== letters[inputElement.value.length-2].getBoundingClientRect().top){
                 divElements.forEach((element) => {
@@ -71,7 +73,7 @@ export const setupInputHandlers = () => {
             }
         }
     });
-
+/*
     inputElement.addEventListener('input', () => {
         const letters = flexContainer.querySelectorAll('.letter');
         for(const letter of letters){
@@ -79,6 +81,6 @@ export const setupInputHandlers = () => {
                 mistakes++;
             }
         }
-    });
+    });*/
 
 }

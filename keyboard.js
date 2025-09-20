@@ -1,4 +1,4 @@
-import { flexContainer, inputElement } from './domElements.js';
+import {inputElement, testViewElement} from './domElements.js';
 
 // Маппинг: введённый символ → CSS-селектор клавиши
 const keyMap = {
@@ -68,7 +68,7 @@ const hintKeyActive = (symbol) => {
 }
 
 export const keyboardActive = () => {
-    hintKeyActive(flexContainer.querySelector('.letter').textContent.toLowerCase());
+    hintKeyActive(testViewElement.querySelector('.letter').textContent.toLowerCase());
 }
 
 export const updateKeyboard = () =>{
@@ -95,7 +95,7 @@ const hintKeyDisable = (symbol) => {
 
 export const setupKeyboardHandlers = () => {
     inputElement.addEventListener('input', (symbol) => {
-        const letters = flexContainer.querySelectorAll('.letter');
+        const letters = testViewElement.querySelectorAll('.letter');
         const s = symbol.data.toLowerCase()
         const className = keyMap[s];
         if (!className) return;
@@ -111,7 +111,6 @@ export const setupKeyboardHandlers = () => {
                 hintKeyActive(letters[inputElement.value.length].textContent.toLowerCase());
         }
         if(keyEl.classList.contains('key-hint') && letters[inputElement.value.length-1].classList.contains("letter_correct")) {
-
             hintKeyDisable(s);
         }
     });

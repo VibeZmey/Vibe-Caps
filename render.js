@@ -1,14 +1,14 @@
 // render.js
 import {updateCarret} from "./carret.js";
 import {data} from "./data.js";
-import { flexContainer, inputElement, carretElement} from './domElements.js';
+import { testViewElement, inputElement, carretElement} from './domElements.js';
 export let currentSentence = 0;
 
 export const updateSentence = () => {
     currentSentence = Math.floor(Math.random() * data.length);
     const sentence = data[currentSentence].replaceAll(' ', '\u00A0/').split('/');
-    flexContainer.innerHTML = '';
-    flexContainer.appendChild(carretElement);
+    testViewElement.innerHTML = '';
+    testViewElement.appendChild(carretElement);
     inputElement.value = '';
     for(let word = 0; word < sentence.length; word++){
         let divElement = document.createElement('div');
@@ -16,7 +16,7 @@ export const updateSentence = () => {
         for(let letter = 0; letter < sentence[word].length; letter++){
             divElement.innerHTML += `<span class="letter">${sentence[word][letter]}</span>`;
         }
-        flexContainer.appendChild(divElement);
+        testViewElement.appendChild(divElement);
     }
     updateCarret();
 }
@@ -24,8 +24,8 @@ export const updateSentence = () => {
 
 export const restartSentence = () => {
     const sentence = data[currentSentence].replaceAll(' ', '\u00A0/').split('/');
-    flexContainer.innerHTML = '';
-    flexContainer.appendChild(carretElement);
+    testViewElement.innerHTML = '';
+    testViewElement.appendChild(carretElement);
     inputElement.value = '';
     for(let word = 0; word < sentence.length; word++){
         let divElement = document.createElement('div');
@@ -33,7 +33,7 @@ export const restartSentence = () => {
         for(let letter = 0; letter < sentence[word].length; letter++){
             divElement.innerHTML += `<span class="letter">${sentence[word][letter]}</span>`;
         }
-        flexContainer.appendChild(divElement);
+        testViewElement.appendChild(divElement);
     }
     updateCarret();
 

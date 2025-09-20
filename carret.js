@@ -1,8 +1,8 @@
 // carret.js
-import { flexContainer, inputElement, carretElement } from './domElements.js';
+import {inputElement, carretElement, testViewElement} from './domElements.js';
 
 export const updateCarret = () => {
-    const letters = flexContainer.querySelectorAll('.letter');
+    const letters = testViewElement.querySelectorAll('.letter');
     if(inputElement.value.length === 0){
         const firstLetterRect = letters[0].getBoundingClientRect();
         carretElement.style.left = `${firstLetterRect.left - firstLetterRect.left}px`;
@@ -12,7 +12,7 @@ export const updateCarret = () => {
 
     const lastLetter = letters[inputElement.value.length-1];
     const lastLetterRect = lastLetter.getBoundingClientRect();
-    const flexConteinerRect = flexContainer.getBoundingClientRect();
+    const flexConteinerRect = testViewElement.getBoundingClientRect();
 
     carretElement.style.left = `${lastLetterRect.left - flexConteinerRect.left + lastLetterRect.width}px`;
     carretElement.style.top = `${lastLetterRect.top - flexConteinerRect.top}px`;
@@ -21,7 +21,7 @@ export const updateCarret = () => {
 export const setupCarretHandlers = () => {
     carretElement.classList.add('carret');
 
-    flexContainer.addEventListener('click', ()=> {
+    testViewElement.addEventListener('click', ()=> {
         carretElement.classList.add('carret-active');
         carretElement.classList.remove('carret');
 

@@ -1,5 +1,5 @@
 // domElements.js
-export const flexContainer = document.querySelector('.testView');
+export const testViewElement = document.querySelector('.testView');
 export const inputElement = document.querySelector('.wordsInput');
 export const mistakeElement = document.getElementById('mistake');
 export const carretElement = document.createElement('span');
@@ -12,3 +12,4 @@ export const accuracyCircleElement = document.querySelector('.progress-fill-accu
 export const accuracyText = document.querySelector('.progress-text-accuracy');
 export const speedCircleElement = document.querySelector('.progress-fill-speed');
 export const speedText = document.querySelector('.progress-text-speed');
+export const blurTextElement = document.querySelector('.blur-text');

@@ -3,6 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
+a,
+a:link,
+a:visited {
+    text-decoration: none; /* убрать подчёркивание */
+    color: inherit;        /* не менять цвет (наследовать от родителя) */
+}
+
 .my-theme-dark{
     --bg-item1-color: #77428c;
     --bg-item2-color: #623773;
@@ -13,6 +20,7 @@
     --key-shadow: rgba(255, 23, 255, 0.5);
     --key-mod-color: #b393bd;
     --progress-stroke-color: #df7bff;
+    --theme-icons-color: white;
 }
 
 .my-theme-light {
@@ -25,6 +33,7 @@
     --key-shadow: rgba(44, 23, 53, 0.3);
     --key-mod-color: #bea9cc;
     --progress-stroke-color: #e8a3ff;
+    --theme-icons-color: #b393bd;
 }
 
 
@@ -32,7 +41,7 @@ html, body{
     height: 100%;
 }
 
-.inputWrapper{
+.input-wrapper{
     position: absolute;
     flex-direction: row;
     flex-wrap: wrap;
@@ -64,6 +73,17 @@ html, body{
     margin: 0 auto;
     padding: 0;
     top: 100px;
+}
+.blur-text{
+    position: relative;
+    top:170px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Comic Sans MS', sans-serif;
+    color: var(--key-hint-color);
+    font-size: 28px;
+    visibility: hidden;
+
 }
 .testView::-webkit-scrollbar {
     display: none;
@@ -173,13 +193,14 @@ html, body{
 }
 
 .dialog-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 250px 60px;
 }
 
 .logo{
-    fill: white;
+    fill: var(--theme-icons-color);
     position: relative;
 }
 
@@ -192,8 +213,8 @@ html, body{
     background: var(--bg-item2-color);
     border-radius: 8px;
     box-shadow: 0 4px 12px var(--dialog--box-shadow);
-    width: 650px;
-    height: 500px;
+    width: 520px;
+    height: 400px;
     position: relative;
     border: none;
 }
@@ -214,6 +235,8 @@ html, body{
     font-size: 40px;
     font-family: 'Comic Sans MS', sans-serif;
     text-align: center;
+    grid-row:1;
+
 }
 
 .writed-text{
@@ -301,6 +324,8 @@ html, body{
 .button-container{
     display: flex;
     flex-direction: row;
+    grid-column: 1/2;
+    grid-row: 3;
 }
 
 .theme-icon{
@@ -318,8 +343,7 @@ html, body{
     min-height: 70px;
     width: 200px;
     height: 200px;
-
-    margin: 20px;
+    margin: 5px 20px;
 }
 
 .progress-bg {
@@ -344,10 +368,211 @@ html, body{
     fill: white;
     text-anchor: middle;
     dominant-baseline: middle;
-    font-family: Arial, sans-serif;
+    font-family: 'Comic Sans MS', sans-serif;
+    margin: 5px;
 }
+.speed,
+.accuracy{
+    grid-row: 2;
+}
+.speed{
+    grid-column: 1;
+}
+.accuracy{
+    grid-column: 2;
+}
+.stats-text{
+    color: white;
+    font-size: 32px;
+    font-family: 'Comic Sans MS', sans-serif;
+    text-align: center;
+
+}
+
 
 .stats-content{
     display: flex;
     flex-direction: row;
+}
+
+.logo-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 300px;
+    position: relative;
+    margin: 20px;
+}
+.animation-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    height: 300px;
+    width: 100%;
+    max-width: 1100px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    overflow: hidden;
+    gap: 10px;
+}
+
+.animated-text-box{
+    position: relative;
+    vertical-align: top;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    width: 750px;
+    height: 120px;
+    top:90px;
+    overflow: hidden;
+}
+
+.animated-text{
+    font-family: 'Comic Sans MS', sans-serif;
+    font-size: 50px;
+    color: white;
+}
+
+
+.animated-logo {
+    transform: scale(0) rotate(0deg);
+    transform-origin: center;
+
+    /* Одна анимация, которая включает появление и непрерывное вращение */
+    animation: growAndSpinContinuous 2750ms ease-out forwards;
+}
+
+@keyframes growAndSpinContinuous {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        transform: scale(1) rotate(180deg);
+        opacity: 0.7;
+    }
+    20% {
+        transform: scale(2) rotate(360deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2) rotate(720deg);
+        opacity: 1;
+    }
+}
+
+
+:root {
+    --sb-drop-duration: 0.9s;       /* длительность падения */
+    --sb-pulse-delay: 1.1s;         /* пауза до начала пульсации (чуть больше drop) */
+    --sb-pulse-duration: 1.8s;      /* период пульсации */
+    --sb-pulse-min-opacity: .6;     /* минимальная непрозрачность в пульсе */
+    --sb-bg: #df7bff;
+    --sb-bg-hover: #c67bdc;
+    --sb-text: #ffffff;
+}
+
+/* Базовая кнопка */
+.start-button {
+    appearance: none;
+    border: none;
+    color: var(--sb-text);
+    background: var(--sb-bg);
+    width: 200px;
+    height: 80px;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: .3px;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(223, 123, 255,.35);
+    transform-origin: 50% 0%;
+    will-change: transform, opacity, box-shadow;
+    /* Начальное состояние перед падением */
+    opacity: 0;
+    position: relative;
+    top: 400px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* 1) Падение + отскок (один раз, фиксируем финал)
+       2) Плавная пульсация (ease-in-out, бесконечно, с задержкой)
+    */
+    animation:
+            sb-dropIn var(--sb-drop-duration) cubic-bezier(.2,.9,.15,1.05) forwards,
+            sb-fadePulse var(--sb-pulse-duration) ease-in-out infinite var(--sb-pulse-delay);
+}
+
+.start-button:hover { background: var(--sb-bg-hover); }
+.start-button:focus-visible {
+    outline: 3px solid rgba(255,255,255,.55);
+    outline-offset: 3px;
+}
+
+/* Вариант: пульсация «свечением» вместо изменения прозрачности */
+.start-button.start-button--glow {
+    animation:
+            sb-dropIn var(--sb-drop-duration) cubic-bezier(.2,.9,.15,1.05) forwards,
+            sb-glowPulse var(--sb-pulse-duration) ease-in-out infinite var(--sb-pulse-delay);
+}
+
+/* Уважение prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .start-button,
+    .start-button.start-button--glow {
+        animation: none;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Кадры падения */
+@keyframes sb-dropIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-120vh) rotate(-6deg) scale(.98);
+        filter: blur(2px);
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(10px) rotate(0deg) scale(1.02);
+        filter: blur(0);
+    }
+    85% { transform: translateY(-6px) scale(.995); }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Плавная пульсация по прозрачности (мягкое «дыхание») */
+@keyframes sb-fadePulse {
+    0%   { opacity: 1; }
+    50%  { opacity: var(--sb-pulse-min-opacity); }
+    100% { opacity: 1; }
+}
+
+/* Плавная пульсация свечением (не меняем opacity) */
+@keyframes sb-glowPulse {
+    0% {
+        box-shadow: 0 10px 24px rgba(185, 92, 231, 0.35);
+        filter: brightness(1);
+    }
+    50% {
+        box-shadow:
+                0 0 24px 8px rgba(255,255,255,.25),
+                0 10px 24px rgba(185, 92, 231,.45);
+        filter: brightness(1.06);
+    }
+    100% {
+        box-shadow: 0 10px 24px rgba(185, 92, 231,.35);
+        filter: brightness(1);
+    }
 }
